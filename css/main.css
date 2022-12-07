@@ -1,1 +1,169 @@
-ECHO is on.
+
+:root{
+    --main-font-size:22px;
+    --bgc:rgb(88, 0, 139);
+    --primary:rgb(13, 145, 105);
+    --onhover:rgba(28, 55, 177, 0);
+    --text:rgb(245, 231, 231);
+    --serif-font: 'Merriweather', serif;
+    --sans-font: 'Merriweather Sans', sans-serif;
+}
+
+html{
+    font-size: var(--main-font-size);
+}
+
+body *{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body{
+    background-color: var(--bgc);
+    color: var(--text);
+    font-family: var(--sans-font);
+}
+h1,h2,h3,h4,h5,h6{
+    font-family: var(--serif-font);
+}
+
+a,button{
+    text-decoration: none;
+}
+
+main{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.5em;
+    max-width: 800px;
+    margin: auto;
+}
+
+nav{
+    top: 30px;
+    left: 30px;
+    position: absolute;
+    display: flex;
+    gap: 1rem;
+}
+.nav-link{
+    background-color: var(--primary);
+    color: var(--text);
+    padding: .2rem .6rem;
+    border-radius: .2rem;
+    border:1px solid #ffffff11;
+    transition: 0.3s all;
+    box-shadow: inset 0px 10px 20px 0px #8b6d0087;
+}
+.nav-link:hover{
+    background-color: var(--onhover);
+    box-shadow: inset 0px 5px 30px 0px #c0c0c087,
+    0px 5px 30px -12px #c0c0c087;
+}
+.nav-active{
+    background-color: var(--onhover);
+}
+
+/* END OF HOME section */
+
+/* USER-PREF section */
+
+.form-container{
+    width: 100%;
+    /* flex-basis: 60%; */
+    padding: 1.2rem;
+    background-color: var(--text);
+    color: var(--bgc);
+    border-radius: 0.2rem;
+}
+
+.form-container form{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+    justify-content: space-evenly;
+}
+.form-group{
+    display: flex;
+
+}
+.form-group label{
+    font-size: 18px;
+    flex-basis:30%;
+}
+.form-group input{
+    border-radius: 0.2rem;
+    outline: none;
+    border:none;
+    height: 100%;
+    flex-grow: 1;
+    border-radius: .25rem;
+    /* width: 100%;  */
+}
+.form-group input[type="text"]{
+    padding: .4rem;
+    color: var(--bgc);
+}
+
+/* MAP section */
+
+.map-section{
+    width: 100%;
+    overflow: hidden;
+    color: var(--text);
+    font-weight: 100;
+    flex-basis: 60%;
+    background-color: var(--text);
+    /* padding: 1rem; */
+    border-radius: 0.3rem;
+    display: flex;
+}
+
+.map-container{
+    flex-basis: 50%;
+    width: 200px;
+    background-color: #222;
+}
+
+.saved-container{
+    padding: 1rem;
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+}
+
+.saved-container h4{
+    color: var(--bgc);
+}
+
+.list-item{
+    position: relative;
+    background-color: var(--bgc);
+    padding: .6rem;
+    border-radius: 0.2rem;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+    box-shadow: inset 0px -.3rem 0px rgba(255, 255, 255, 0.185);
+    transition: 0.25s box-shadow 0.05s;
+}
+
+.list-item:hover{
+    box-shadow: inset 0px -.2rem 0px var(--primary);
+}
+
+.btn-del-list{
+    top: .3rem;
+    right: .3rem;
+    position: absolute;
+    cursor: pointer;
+}
