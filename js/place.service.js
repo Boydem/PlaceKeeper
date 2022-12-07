@@ -69,3 +69,13 @@ function _createPlaces() {
         time: '16/10/22, 13:01'
     }]
 }
+
+function createFormatedDate(date) {
+    const formatedDate = new Intl.DateTimeFormat('en').format(date)
+    const options = {
+        hour: '2-digit',
+        minute: '2-digit'
+    }
+    const formatedTime = new Intl.DateTimeFormat('he', options).format(date)
+    return formatedDate + ', ' + formatedTime
+}

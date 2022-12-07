@@ -14,7 +14,7 @@ function onAddPlace() {
         name: prompt('enter name'),
         lat: prompt('enter coords-lat'),
         lng: prompt('enter coords-lng'),
-        time: Date.now()
+        time: createFormatedDate(Date.now())
     }
     addPlace(loc)
     renderPlaceList()
