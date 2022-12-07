@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/main.css">
     <title>PlaceKeeper</title>
 </head>
-<body onload="onInit()">
+<body onload="onInit();onMapInit()">
     
     <main>
         <nav>
@@ -19,7 +19,7 @@
         </nav>
 
         <section class="map-section">
-            <div class="map-container"></div>
+            <div class="map-container"><div id="map"></div></div>
             <aside class="saved-container">
                 <h4>Saved Locations</h4>
                 <article class="list-item">
@@ -42,11 +42,12 @@
 
     </main>
     
-
     <script src="js/utils.service.js"></script>
     <script src="js/storage.service.js"></script>
     <script src="js/user.service.js"></script>
     <script src="js/place.service.js"></script>
+    <script src="js/place.controller.js"></script>
     <script src="js/user.controller.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMf90nVVG34hQ6mKWlaqBzUvJ3X1X-MVI&callback=initMap"></script>
 </body>
 </html>

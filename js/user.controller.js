@@ -2,6 +2,7 @@
 
 function onInit() {
     renderUserPrefs()
+
 }
 
 function onSaveSettings(ev) {
@@ -20,10 +21,8 @@ function onSaveSettings(ev) {
 }
 
 function renderUserPrefs() {
-
     const user = getUser()
     if (!user) return console.log('NO USER FOUND')
-    document.documentElement.style.setProperty('--bgc', `${user.bgColor}`);
-    document.documentElement.style.setProperty('--text', `${user.txtColor}`);
-
+    document.documentElement.style.setProperty('--bgc', `${user.bgColor}`)
+    document.documentElement.style.setProperty('--text', `${user.txtColor}`)
 }
