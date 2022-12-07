@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/main.css">
     <title>PlaceKeeper</title>
 </head>
-<body>
+<body onload="onInit()">
 
     <main>
         <nav>
@@ -20,10 +20,10 @@
         <h1>Settings</h1>
         <h5>Choose youre prefrences</h5>
         <section class="form-container">
-            <form id="userPrefForm">
+            <form id="userPrefForm" onsubmit="onSaveSettings(event)">
                 <div class="form-group">
-                    <label for="firstName">First Name:</label>
-                    <input type="text" id="firstName">
+                    <label for="userName">Full Name:</label>
+                    <input type="text" id="userName" required placeholder="First and last name">
                 </div>
                 <div class="form-group">
                     <label for="bgColor">Bacgkround Color:</label>
@@ -35,12 +35,13 @@
                 </div>
                 <div class="form-group">
                     <label for="zoom">Zoom Factor:</label>
-                    <input type="range" id="zoom">
+                    <input type="range" id="zoom" min="1" max="21" value="10">
                 </div>
                 <div class="form-group">
                     <label for="location">Map Start Location:</label>
-                    <input type="text" id="location">
+                    <input type="text" id="location" required placeholder="Enter like this(12,12)">
                 </div>
+                <button>Save</button>
             </form>
         </section>
     </main>
@@ -50,5 +51,6 @@
     <script src="js/storage.service.js"></script>
     <script src="js/user.service.js"></script>
     <script src="js/place.service.js"></script>
+    <script src="js/user.controller.js"></script>
 </body>
 </html>

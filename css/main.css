@@ -1,16 +1,23 @@
 
 :root{
     --main-font-size:22px;
-    --bgc:rgb(88, 0, 139);
+    --bgc:;
     --primary:rgb(13, 145, 105);
     --onhover:rgba(28, 55, 177, 0);
-    --text:rgb(245, 231, 231);
+    --text:;
     --serif-font: 'Merriweather', serif;
     --sans-font: 'Merriweather Sans', sans-serif;
 }
 
 html{
     font-size: var(--main-font-size);
+}
+
+button{
+    border: none;
+    background-color: var(--bgc);
+    color: var(--text);
+    border-radius: .2rem;
 }
 
 body *{
@@ -39,7 +46,7 @@ main{
     align-items: flex-start;
     flex-direction: column;
     gap: 0.5em;
-    max-width: 800px;
+    max-width: 700px;
     margin: auto;
 }
 
@@ -87,11 +94,11 @@ nav{
     display: flex;
     flex-direction: column;
     gap: .4rem;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 .form-group{
     display: flex;
-
+    align-items: center;
 }
 .form-group label{
     font-size: 18px;
@@ -109,6 +116,15 @@ nav{
 .form-group input[type="text"]{
     padding: .4rem;
     color: var(--bgc);
+}
+.form-container form button{
+    padding: .3rem 1rem;
+    align-self: flex-start;
+    transition: 0.3s background-color;
+}
+.form-container form button:hover{
+
+    background-color:var(--primary);
 }
 
 /* MAP section */
