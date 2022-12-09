@@ -7,32 +7,35 @@ function onInit() {
 
 function onSaveSettings(ev) {
     ev.preventDefault()
-    // console.log(ev)
+    // capture the form this way
     const elForm = ev.target
-    // console.log(elForm)
     const elFormInputs = Array.from(elForm.querySelectorAll('input'))
-    // console.log(elFormInputs)
+    // reduce to map all inputs values
     const newUserSettings = elFormInputs.reduce((acc, elFormInput) => {
         if (elFormInput.id) acc[elFormInput.id] = elFormInput.value
-        // console.log('elFormInput', elFormInput)
         return acc
     }, {})
-    // let [userName, bgColor, txtColor, zoom, location] = elFormInputs
-    // const newUserSettings = {
-    //     userName: userName.value,
-    //     bgColor: bgColor.value,
-    //     txtColor: txtColor.value,
-    //     zoom: zoom.value,
-    //     location: location.value
-    // }
-    saveSettings(newUserSettings)
+    saveUserSettings(newUserSettings)
+    savePlaceList()
     renderUserPrefs()
+    setUserPrefLocation()
 }
 
 function renderUserPrefs() {
     const user = getUser()
-    if (!user) return console.log('NO USER FOUND')
+    // if (!user || user.userName === 'Guest') return console.log('NO USER FOUND')
     document.documentElement.style.setProperty('--bgc', `${user.bgColor}`)
     document.documentElement.style.setProperty('--text', `${user.txtColor}`)
-    // console.log('document.documentElement', document.documentElement)
+    if (location.href.includes('user-settings.html')) {}
+}
+
+function setUserPrefLocation() {
+    const startLocationCoords = getCurrUserLoc()
+    const loc = {
+        name: `${getUser().userName} Start Location`,
+        lat: startLocationCoords.lat,
+        lng: startLocationCoords.lng,
+        time: createFormatedDate(Date.now())
+    }
+    addPlace(loc)
 }

@@ -7,8 +7,17 @@ function getPlaces() {
     return gSavedPlaces
 }
 
+function savePlaceList() {
+    const userPrefStartLoc = gSavedPlaces.findIndex(place => place.name.includes('Start'))
+    if (userPrefStartLoc === -1) return saveToStorage(STORAGE_KEY_PLACE_DB, gSavedPlaces)
+    console.log('userPrefStartLoc:', userPrefStartLoc)
+    gSavedPlaces.splice(userPrefStartLoc, 1)
+    saveToStorage(STORAGE_KEY_PLACE_DB, gSavedPlaces)
+}
+
 function removePlace(placeId) {
     const placeIdx = gSavedPlaces.findIndex(place => place.id === placeId)
+    if (placeIdx === -1) return
     gSavedPlaces.splice(placeIdx, 1)
     if (gSavedPlaces.length === 0) {
         saveToStorage(STORAGE_KEY_PLACE_DB, null)
@@ -70,30 +79,19 @@ function _createPlaces() {
     }]
 }
 
-function createFormatedDate(date) {
-    const formatedDate = new Intl.DateTimeFormat('en').format(date)
-    const options = {
-        hour: '2-digit',
-        minute: '2-digit'
-    }
-    const formatedTime = new Intl.DateTimeFormat('he', options).format(date)
-    return formatedDate + ', ' + formatedTime
-}
-
 // * get User's location
 function getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
+        navigator.geolocation.getCurrentPosition(showPosition);
     } else {
-      x.innerHTML = "Geolocation is not supported by this browser.";
+        x.innerHTML = "Geolocation is not supported by this browser.";
     }
-  }
-  
-  function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude +
-    "<br>Longitude: " + position.coords.longitude;
-  }
+}
 
+function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude +
+        "<br>Longitude: " + position.coords.longitude;
+}
 
 
 
@@ -101,16 +99,16 @@ function getLocation() {
 function getPlaceAsCSV() {
     let csvStr = `Id,Latitude,Longitude,Name`
     if (gPlaces.length) {
-      gPlaces.forEach((place) => {
-        const csvLine = `\n${place.id}, ${place.pos.lat}, ${place.pos.lng}, ${place.name}`
-        csvStr += '\n' + csvLine
-      })
-      return csvStr
+        gPlaces.forEach((place) => {
+            const csvLine = `\n${place.id}, ${place.pos.lat}, ${place.pos.lng}, ${place.name}`
+            csvStr += '\n' + csvLine
+        })
+        return csvStr
     }
-  }
-  
-  function downloadCSV() {
+}
+
+function downloadCSV() {
     const csvContent = getPlaceAsCSV()
     if (!csvContent) return
     window.open('data:text/csv;charset=utf-8,' + csvContent)
-  }
+}

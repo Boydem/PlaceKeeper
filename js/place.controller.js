@@ -1,8 +1,8 @@
 'use strict'
 
 function onMapPageInit() {
-    renderPlaceList()
     renderUserPrefs()
+    renderPlaceList()
     // const elMap = document.querySelector('#map')
 }
 
@@ -18,6 +18,7 @@ function onAddPlace(ev) {
         time: createFormatedDate(Date.now())
     }
     addPlace(loc)
+    centerMap(loc.lat, loc.lng)
     renderPlaceList()
 }
 
@@ -38,7 +39,7 @@ function renderPlaceList() {
     elSavedContainer.innerHTML = strHTML.join('')
 }
 
-function centerMap(lat = 55, lng = 44) {
+function centerMap(lat, lng) {
     const elMap = document.querySelector('#map')
     const currUserZoom = getCurrUserZoom()
     // options
@@ -53,14 +54,19 @@ function centerMap(lat = 55, lng = 44) {
     const map = new google.maps.Map(
         elMap, options);
     // The marker
-    const marker = new google.maps.Marker({
-        position: {
-            lat,
-            lng
-        },
-        map: map,
-    });
-    // map.addListener("dblclick", onAddPlace)
+    const locations = getPlaces()
+    locations.forEach(location => {
+        const marker = new google.maps.Marker({
+            position: {
+                lat: location.lat,
+                lng: location.lng
+            },
+            map: map,
+        });
+        marker.setMap(map)
+        // marker.addListener("click", centerMap('ev.lat(),ev.lng()'))
+    })
+    map.addListener("dblclick", onAddPlace)
 }
 
 function initMap() {
@@ -75,15 +81,19 @@ function initMap() {
     // The map   
     const map = new google.maps.Map(
         elMap, options);
+
+    const locations = getPlaces()
+    locations.forEach(location => {
+        const marker = new google.maps.Marker({
+            position: {
+                lat: location.lat,
+                lng: location.lng
+            },
+            map: map,
+        });
+        marker.setMap(map)
+    })
     // The marker
-    const marker = new google.maps.Marker({
-        position: currUserLoc,
-        map: map,
-    });
     map.addListener("dblclick", onAddPlace)
 
-    marker.addListener("click", () => {
-        map.setZoom(8);
-        map.setCenter(marker.getPosition());
-      });
 }

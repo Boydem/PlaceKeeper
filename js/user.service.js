@@ -4,7 +4,7 @@ const STORAGE_KEY_USER_DB = 'userDB'
 
 const gUser = _createUser()
 
-function saveSettings(newUserSettings) {
+function saveUserSettings(newUserSettings) {
     saveToStorage(STORAGE_KEY_USER_DB, newUserSettings)
 }
 
