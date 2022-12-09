@@ -1,6 +1,8 @@
 'use strict'
-
-renderUserName()
+function onHomePageInit() {
+    renderUserName()
+    renderUserPrefs()
+}
 
 function renderUserName() {
     const user = getUser()

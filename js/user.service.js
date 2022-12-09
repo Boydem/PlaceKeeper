@@ -14,9 +14,10 @@ function getUser() {
 
 function getCurrUserLoc() {
     const currUserSettings = loadFromStorage(STORAGE_KEY_USER_DB)
+    const locations = currUserSettings.location.split(',')
     return {
-        lat: +currUserSettings.location.split(',')[0],
-        lng: +currUserSettings.location.split(',')[1]
+        lat: +locations[0],
+        lng: +locations[1]
     }
 }
 

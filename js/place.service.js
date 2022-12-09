@@ -1,7 +1,7 @@
 'use strict'
 
 const STORAGE_KEY_PLACE_DB = 'placeDB'
-const gSavedPlaces = loadFromStorage(STORAGE_KEY_PLACE_DB) ? loadFromStorage(STORAGE_KEY_PLACE_DB) : _createPlaces()
+const gSavedPlaces = loadFromStorage(STORAGE_KEY_PLACE_DB) || _createPlaces()
 
 function getPlaces() {
     return gSavedPlaces
@@ -79,3 +79,38 @@ function createFormatedDate(date) {
     const formatedTime = new Intl.DateTimeFormat('he', options).format(date)
     return formatedDate + ', ' + formatedTime
 }
+
+// * get User's location
+function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+  }
+  
+  function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude +
+    "<br>Longitude: " + position.coords.longitude;
+  }
+
+
+
+
+// * funcitons for thr CSV bouns
+function getPlaceAsCSV() {
+    let csvStr = `Id,Latitude,Longitude,Name`
+    if (gPlaces.length) {
+      gPlaces.forEach((place) => {
+        const csvLine = `\n${place.id}, ${place.pos.lat}, ${place.pos.lng}, ${place.name}`
+        csvStr += '\n' + csvLine
+      })
+      return csvStr
+    }
+  }
+  
+  function downloadCSV() {
+    const csvContent = getPlaceAsCSV()
+    if (!csvContent) return
+    window.open('data:text/csv;charset=utf-8,' + csvContent)
+  }

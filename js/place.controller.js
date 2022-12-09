@@ -1,19 +1,20 @@
 'use strict'
 
-function onMapInit() {
+function onMapPageInit() {
     renderPlaceList()
-    const elMap = document.querySelector('#map')
+    renderUserPrefs()
+    // const elMap = document.querySelector('#map')
 }
 
 function onPlaceClick(lat, lng) {
     centerMap(lat, lng)
 }
 
-function onAddPlace() {
+function onAddPlace(ev) {
     const loc = {
         name: prompt('enter name'),
-        lat: prompt('enter coords-lat'),
-        lng: prompt('enter coords-lng'),
+        lat: ev.latLng.lat(),
+        lng: ev.latLng.lng(),
         time: createFormatedDate(Date.now())
     }
     addPlace(loc)
@@ -33,8 +34,8 @@ function renderPlaceList() {
         <span class="list-time">Saved: ${place.time}</span>
         <span class="btn-del-list" onclick="onRemovePlace('${place.id}')">✕</span>
         </article>`)
-    const elListContainer = document.querySelector('.saved-container')
-    elListContainer.innerHTML = strHTML.join('')
+    const elSavedContainer = document.querySelector('.saved-container')
+    elSavedContainer.innerHTML = strHTML.join('')
 }
 
 function centerMap(lat = 55, lng = 44) {
@@ -80,4 +81,9 @@ function initMap() {
         map: map,
     });
     map.addListener("dblclick", onAddPlace)
+
+    marker.addListener("click", () => {
+        map.setZoom(8);
+        map.setCenter(marker.getPosition());
+      });
 }
